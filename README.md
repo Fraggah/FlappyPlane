@@ -30,6 +30,3 @@ FlappyPlane is a custom Flappy Bird clone developed as an exercise in gameplay s
   **Solution:** Adjusted `CollisionShape2D` and scaled sprites to match hitbox boundaries precisely.
 
 ---
-
-## 📂 Project Structure
-
