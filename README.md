@@ -1,12 +1,13 @@
 # FlappyPlane
 
+<img width="1920" height="1080" alt="FlappyPlane" src="https://github.com/user-attachments/assets/28021ad8-e78f-4bd8-81f1-4be880fc4de4" />
+
 **Genre:** Arcade – Endless Runner  
 **Engine:** Godot Engine (GDScript)  
 **Platform:** PC / HTML5  
 
-FlappyPlane is a custom Flappy Bird clone developed as an exercise in gameplay scripting, performance optimization, and collision handling in Godot.
+FlappyPlane is a custom Flappy Bird clone developed as an exercise in gameplay scripting, performance optimization, and collision handling in Godot
 
----
 
 ## 🎮 Technical Features
 
