@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7k6yfp538a7t"]
+
+[ext_resource type="Script" uid="uid://cujlnq7ull44l" path="res://Scenes/Main/main.gd" id="1_5yls4"]
+[ext_resource type="Texture2D" uid="uid://duiy5x8u0hr7r" path="res://Assets/Sprites/background.png" id="1_lixft"]
+[ext_resource type="PackedScene" uid="uid://c6y4sdx2crqet" path="res://Scenes/Player/player.tscn" id="2_qw60k"]
+[ext_resource type="PackedScene" uid="uid://d3ooxn4krpq3n" path="res://Scenes/Extra/spawner.tscn" id="4_5yls4"]
+[ext_resource type="PackedScene" uid="uid://c67ryf4kp0qcv" path="res://Scenes/Ground/ground.tscn" id="5_p6jpk"]
+[ext_resource type="PackedScene" uid="uid://buorsxyl2t2hj" path="res://Scenes/GameUI/game_ui.tscn" id="6_2a143"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_5yls4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -48)
+scale = Vector2(2, 2)
+texture = ExtResource("1_lixft")
+centered = false
+
+[node name="Player" parent="." instance=ExtResource("2_qw60k")]
+position = Vector2(223, 382)
+
+[node name="Spawner" parent="." instance=ExtResource("4_5yls4")]
+
+[node name="Ground" parent="." instance=ExtResource("5_p6jpk")]
+position = Vector2(0, 819)
+
+[node name="GameUI" parent="." instance=ExtResource("6_2a143")]
+
+[connection signal="on_game_started" from="Player" to="." method="_on_player_on_game_started"]
+[connection signal="on_obstacle_crash" from="Spawner" to="." method="_on_spawner_on_obstacle_crash"]
+[connection signal="on_player_score" from="Spawner" to="." method="_on_spawner_on_player_score"]
+[connection signal="on_player_crash" from="Ground" to="." method="_on_ground_on_player_crash"]

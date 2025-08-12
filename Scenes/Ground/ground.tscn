@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://c67ryf4kp0qcv"]
+
+[ext_resource type="Script" uid="uid://cyfk2t3ae7ong" path="res://Scenes/Ground/ground.gd" id="1_7ggpg"]
+[ext_resource type="Texture2D" uid="uid://cvjp578yskg1i" path="res://Assets/Sprites/groundSnow.png" id="2_h71jw"]
+[ext_resource type="AudioStream" uid="uid://dnm5b6pojwpjl" path="res://Assets/Audio/sfx_die.wav" id="3_h71jw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2f5ug"]
+size = Vector2(808, 67)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gy27"]
+size = Vector2(808, 67)
+
+[node name="Ground" type="Node2D"]
+z_index = 1
+script = ExtResource("1_7ggpg")
+
+[node name="Ground_1" type="Area2D" parent="."]
+physics_interpolation_mode = 2
+position = Vector2(404, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground_1"]
+unique_name_in_owner = true
+texture = ExtResource("2_h71jw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground_1"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_2f5ug")
+
+[node name="Ground_2" type="Area2D" parent="."]
+physics_interpolation_mode = 2
+position = Vector2(1212, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground_2"]
+texture = ExtResource("2_h71jw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground_2"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_3gy27")
+debug_color = Color(0.959945, 0.201742, 1.92523e-07, 0.42)
+
+[node name="GameOverSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_h71jw")
+bus = &"SFX"
+
+[connection signal="body_entered" from="Ground_1" to="." method="_on_ground_body_entered"]
+[connection signal="body_entered" from="Ground_2" to="." method="_on_ground_body_entered"]

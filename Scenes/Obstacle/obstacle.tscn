@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://bs1wskrgvjidp"]
+
+[ext_resource type="Script" uid="uid://e6e5pjiq5if7" path="res://Scenes/Obstacle/obstacle.gd" id="1_7q7cv"]
+[ext_resource type="Texture2D" uid="uid://cqejf74ebsjqx" path="res://Assets/Sprites/rockSnowDown.png" id="1_h51vr"]
+[ext_resource type="Texture2D" uid="uid://dtfi2ha7ihubr" path="res://Assets/Sprites/rockSnow.png" id="2_7q7cv"]
+[ext_resource type="AudioStream" uid="uid://btxwdnahv1gc" path="res://Assets/Audio/sfx_hit.wav" id="4_8wa5l"]
+[ext_resource type="AudioStream" uid="uid://c6ebci6361y4v" path="res://Assets/Audio/sfx_point.wav" id="5_w43so"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7q7cv"]
+size = Vector2(20, 109.75)
+
+[node name="Obstacle" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_7q7cv")
+
+[node name="TopArea" type="Area2D" parent="."]
+position = Vector2(0, -250)
+
+[node name="Sprite2D" type="Sprite2D" parent="TopArea"]
+texture = ExtResource("1_h51vr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TopArea"]
+position = Vector2(2, -1)
+polygon = PackedVector2Array(50, -118, -57, -117, 10, 117)
+
+[node name="BottomArea" type="Area2D" parent="."]
+position = Vector2(0, 75)
+
+[node name="Sprite2D" type="Sprite2D" parent="BottomArea"]
+texture = ExtResource("2_7q7cv")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BottomArea"]
+polygon = PackedVector2Array(12, -118, 52, 118, -54, 118)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(102.25, -88.5)
+scale = Vector2(1.225, 2.725)
+
+[node name="ScoreArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
+position = Vector2(46.5, -85.5)
+shape = SubResource("RectangleShape2D_7q7cv")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_8wa5l")
+bus = &"SFX"
+
+[node name="ScoreSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_w43so")
+bus = &"SFX"
+
+[connection signal="body_entered" from="TopArea" to="." method="_on_area_body_entered"]
+[connection signal="body_entered" from="BottomArea" to="." method="_on_area_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="body_entered" from="ScoreArea" to="." method="_on_score_area_body_entered"]
